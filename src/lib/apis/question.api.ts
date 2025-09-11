@@ -1,7 +1,5 @@
 export async function getQuestionsByExamId(examId: string) {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/questions?exam=${examId}`
-  );
+  const response = await fetch(`/api/questions?exam=${examId}`);
 
   const payload: ApiResponse<{ questions: Question[] }> = await response.json();
 
