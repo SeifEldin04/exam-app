@@ -1,5 +1,3 @@
-"use client";
-
 export async function getSubjects(page = 1, limit = 6) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API}/subjects?page=${page}&limit=${limit}`
