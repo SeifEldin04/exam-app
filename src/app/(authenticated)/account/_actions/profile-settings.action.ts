@@ -15,17 +15,14 @@ export async function profileSettingsAction(data: ProfileSettingsValues) {
     const token = await getToken();
     console.log(token?.accesstoken);
 
-    const response = await fetch(
-      `https://exam.elevateegy.com/api/v1/auth/editProfile`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          token: `${token?.accesstoken}`,
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${process.env.API}/auth/editProfile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        token: `${token?.accesstoken}`,
+      },
+      body: JSON.stringify(data),
+    });
 
     const result = await response.json();
 
