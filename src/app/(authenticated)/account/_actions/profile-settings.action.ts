@@ -14,7 +14,7 @@ export async function profileSettingsAction(data: ProfileSettingsValues) {
   try {
     const token = await getToken();
 
-    const response = await fetch(`${process.env.API}/auth/editProfile`, {
+    const response = await fetch(`/api/auth/editProfile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
