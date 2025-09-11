@@ -10,11 +10,19 @@ import { AccountSettings } from "@/lib/types/account-settings";
 export default function AccountSettingsClient({
   session,
 }: {
-  session: AccountSettings;
+  session: AccountSettings | null;
 }) {
   const [activeTab, setActiveTab] = useState<"profile" | "changePassword">(
     "profile"
   );
+
+  if (!session) {
+    return (
+      <div className="p-6 text-center text-gray-500">
+        You should login to show settings
+      </div>
+    );
+  }
 
   return (
     <>
