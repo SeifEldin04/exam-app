@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, GraduationCap } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 

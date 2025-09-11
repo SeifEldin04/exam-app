@@ -1,10 +1,8 @@
-import NextAuth, { User } from "next-auth";
+import "next-auth";
+import "next-auth/jwt";
 
 declare module "next-auth" {
-  /**
-   * The shape of the user object returned in the OAuth providers' `profile` callback,
-   * or the second parameter of the `session` callback, when using a database.
-   */
+  // خصائص المستخدم اللي هتجيلك من الـ provider
   interface User {
     _id: string;
     username: string;
@@ -18,15 +16,35 @@ declare module "next-auth" {
     accessToken: string;
   }
 
-  /**
-   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-   */
-  interface Session extends Omit<User, "accessToken"> {}
+  // بنحدد Session هنا بشكل واضح بدل ما نخليه يطابق User مباشرة
+  interface Session {
+    user: {
+      _id: string;
+      username: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      phone: string;
+      role: string;
+      isVerified: boolean;
+      createdAt: string;
+    };
+    accessToken?: string; // اختياري لو حبيت تمرر التوكن في السيشن
+  }
 }
 
-import { JWT } from "next-auth/jwt";
-
 declare module "next-auth/jwt" {
-  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
-  interface JWT extends User {}
+  // هنا نضيف خصائص إضافية بدل ما نخليه فارغ
+  interface JWT extends Record<string, unknown> {
+    _id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    role: string;
+    isVerified: boolean;
+    createdAt: string;
+    accessToken: string;
+  }
 }

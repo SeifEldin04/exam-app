@@ -1,5 +1,3 @@
-import getToken from "../utils/get-token.server";
-
 export async function getQuestionsByExamId(examId: string) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API}/questions?exam=${examId}`

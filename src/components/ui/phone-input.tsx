@@ -91,7 +91,9 @@ const CountrySelect = ({
       modal
       onOpenChange={(open) => {
         setIsOpen(open);
-        open && setSearchValue("");
+        if (open) {
+          setSearchValue("");
+        }
       }}
     >
       <PopoverTrigger asChild>
@@ -106,10 +108,7 @@ const CountrySelect = ({
             countryName={selectedCountry}
           />
           <ChevronsUpDown
-            className={cn(
-              "-mr-2 size-4 opacity-50",
-              disabled ? "hidden" : "opacity-100"
-            )}
+            className={cn("-mr-2 size-4", disabled ? "hidden" : "opacity-50")}
           />
         </Button>
       </PopoverTrigger>
@@ -196,7 +195,7 @@ const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
 
   return (
     <span className="flex h-4 w-6 overflow-hidden rounded-sm bg-foreground/20 [&_svg:not([class*='size-'])]:size-full">
-      {Flag && <Flag title={countryName} />}
+      {Flag ? <Flag title={countryName} /> : null}
     </span>
   );
 };

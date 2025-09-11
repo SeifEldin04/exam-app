@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import {
   accountSettingsProfileSchema,
   AccountSettingsProfileValues,
@@ -27,14 +27,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Check,
-  CircleAlert,
-  CircleX,
-  Loader,
-  TriangleAlert,
-  XCircle,
-} from "lucide-react";
+import { Check, Loader, TriangleAlert } from "lucide-react";
 import deleteAccount, {
   profileSettingsAction as profileSettingsRequest,
 } from "../_actions/profile-settings.action";
@@ -42,8 +35,13 @@ import toast from "react-hot-toast";
 import Error from "@/components/layout/exam/error-paragraph";
 import { signOut } from "next-auth/react";
 import { useMutation } from "@tanstack/react-query";
+import { AccountSettings } from "@/lib/types/account-settings";
 
-export default function AccountSettingsForm({ session }: { session: any }) {
+export default function AccountSettingsForm({
+  session,
+}: {
+  session: AccountSettings;
+}) {
   // Variables
   const [error, setError] = useState<string | "">("");
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default async function catchError<T>(
   callback: () => Promise<ApiResponse<T>>
 ): Promise<[SuccessResponse<T> | null, string | null]> {

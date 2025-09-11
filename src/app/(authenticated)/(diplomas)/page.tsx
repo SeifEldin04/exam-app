@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Title from "../../../components/layout/exam/title";
 import { GraduationCap } from "lucide-react";
 import FetchSubjects from "./_components/fetch-subjects";

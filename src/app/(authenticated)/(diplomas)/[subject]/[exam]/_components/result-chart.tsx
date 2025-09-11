@@ -7,8 +7,9 @@ import {
   ResponsiveContainer,
   Legend,
   Tooltip,
+  TooltipProps,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface ResultChartProps {
   correct?: number;
@@ -56,7 +57,7 @@ export function ResultChart({
 
   const config = sizeConfig[size];
 
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
@@ -71,6 +72,15 @@ export function ResultChart({
     return null;
   };
 
+  type LabelProps = {
+    cx: number;
+    cy: number;
+    midAngle: number;
+    innerRadius: number;
+    outerRadius: number;
+    percent: number;
+  };
+
   const renderCustomLabel = ({
     cx,
     cy,
@@ -78,7 +88,7 @@ export function ResultChart({
     innerRadius,
     outerRadius,
     percent,
-  }: any) => {
+  }: LabelProps) => {
     const RADIAN = Math.PI / 180;
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);

@@ -34,6 +34,9 @@ export default function FetchSubjects() {
   useEffect(() => {
     if (!hasNextPage || isFetchingNextPage) return;
 
+    // خزن قيمة الـ ref الحالية
+    const target = loadMoreRef.current;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -43,14 +46,10 @@ export default function FetchSubjects() {
       { threshold: 1 }
     );
 
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
-    }
+    if (target) observer.observe(target);
 
     return () => {
-      if (loadMoreRef.current) {
-        observer.unobserve(loadMoreRef.current);
-      }
+      if (target) observer.unobserve(target);
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 

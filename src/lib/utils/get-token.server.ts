@@ -1,6 +1,5 @@
 import { decode } from "next-auth/jwt";
 import { cookies } from "next/headers";
-import React from "react";
 
 export default async function getToken() {
   const tokenCookie = cookies().get("next-auth.session-token")?.value;

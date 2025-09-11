@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface PasswordInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 

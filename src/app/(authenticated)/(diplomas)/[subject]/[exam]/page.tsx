@@ -1,4 +1,3 @@
-import { getExamById } from "@/lib/apis/question.api";
 import React from "react";
 import FetchQuestions from "./_components/fetch-questions";
 import Title from "@/components/layout/exam/title";

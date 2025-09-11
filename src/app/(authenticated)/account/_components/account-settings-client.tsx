@@ -5,8 +5,13 @@ import { CircleUserRound, Lock, LogOut } from "lucide-react";
 import AccountSettingsForm from "./account-settings-form";
 import AccountSettingsChangepassword from "./account-settings-changepassword";
 import { signOut } from "next-auth/react";
+import { AccountSettings } from "@/lib/types/account-settings";
 
-export default function AccountSettingsClient({ session }: { session: any }) {
+export default function AccountSettingsClient({
+  session,
+}: {
+  session: AccountSettings;
+}) {
   const [activeTab, setActiveTab] = useState<"profile" | "changePassword">(
     "profile"
   );

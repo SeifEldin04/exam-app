@@ -14,7 +14,7 @@ import {
   SetNewPasswordValue,
 } from "@/lib/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader, MoveLeft, MoveRight } from "lucide-react";
+import { Loader, MoveLeft } from "lucide-react";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Error from "@/components/layout/exam/error-paragraph";

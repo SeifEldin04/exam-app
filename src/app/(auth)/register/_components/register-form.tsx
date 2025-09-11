@@ -18,19 +18,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { RegisterAction } from "../_actions/register.action";
-import { useRouter } from "next/navigation";
 import Error from "@/components/layout/exam/error-paragraph";
 import { useMutation } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
-import { log } from "node:console";
 
 export default function RegisterForm() {
   // Variables
   const [error, setError] = useState<string | "">("");
 
   //   Hooks
-  const router = useRouter();
-
   const form = useForm<RegisterValues>({
     defaultValues: {
       firstName: "",

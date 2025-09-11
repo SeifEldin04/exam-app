@@ -1,8 +1,6 @@
 "use server";
 
 import getToken from "@/lib/utils/get-token.server";
-import { getServerSession } from "next-auth";
-import { cookies, headers } from "next/headers";
 
 type ProfileSettingsValues = {
   firstName: string;
