@@ -7,7 +7,7 @@ export async function getSubjects(page = 1, limit = 6) {
     await response.json();
 
   if ("code" in payload) {
-    throw new Error(payload.messagee);
+    throw new Error(payload.message);
   }
 
   return payload;
