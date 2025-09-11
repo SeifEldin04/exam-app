@@ -55,15 +55,15 @@ export const authOptions: NextAuthOptions = {
     },
 
     session: ({ session, token }) => {
-      session._id = token._id;
-      session.firstName = token.firstName;
-      session.lastName = token.lastName;
-      session.username = token.username;
-      session.email = token.email || "";
-      session.phone = token.phone;
-      session.role = token.role;
-      session.isVerified = token.isVerified;
-      session.createdAt = token.createdAt;
+      session.user._id = token._id;
+      session.user.firstName = token.firstName;
+      session.user.lastName = token.lastName;
+      session.user.username = token.username;
+      session.user.email = token.email || "";
+      session.user.phone = token.phone;
+      session.user.role = token.role;
+      session.user.isVerified = token.isVerified;
+      session.user.createdAt = token.createdAt;
 
       return session;
     },

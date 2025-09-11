@@ -1,8 +1,22 @@
 import "next-auth";
 import "next-auth/jwt";
+import { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
-  // خصائص المستخدم اللي هتجيلك من الـ provider
+  interface Session extends DefaultSession {
+    user: DefaultSession["user"] & {
+      _id: string;
+      username: string;
+      firstName: string;
+      lastName: string;
+      phone: string;
+      role: string;
+      isVerified: boolean;
+      createdAt: string;
+    };
+    accessToken?: string;
+  }
+
   interface User {
     _id: string;
     username: string;
@@ -15,26 +29,9 @@ declare module "next-auth" {
     createdAt: string;
     accessToken: string;
   }
-
-  // بنحدد Session هنا بشكل واضح بدل ما نخليه يطابق User مباشرة
-  interface Session {
-    user: {
-      _id: string;
-      username: string;
-      firstName: string;
-      lastName: string;
-      email: string;
-      phone: string;
-      role: string;
-      isVerified: boolean;
-      createdAt: string;
-    };
-    accessToken?: string; // اختياري لو حبيت تمرر التوكن في السيشن
-  }
 }
 
 declare module "next-auth/jwt" {
-  // هنا نضيف خصائص إضافية بدل ما نخليه فارغ
   interface JWT extends Record<string, unknown> {
     _id: string;
     username: string;
