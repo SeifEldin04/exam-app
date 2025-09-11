@@ -67,7 +67,7 @@ export default function ForgotPasswordEmail() {
               Forgot Password
             </h1>
             <p className="mb-10 text-gray-500">
-              Don’t worry, we will help you recover your account.
+              Dont worry, we will help you recover your account.
             </p>
 
             {/* Email */}
@@ -111,7 +111,7 @@ export default function ForgotPasswordEmail() {
             </Button>
 
             <p className="text-gray-500 text-center">
-              Don't have an account?{" "}
+              Dont have an account?{" "}
               <Link className="text-blue-600" href="/register">
                 {" "}
                 Create yours{" "}

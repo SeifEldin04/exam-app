@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { ReceiveOtpSchema, ReceiveOtpValue } from "@/lib/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader, MoveLeft, MoveRight } from "lucide-react";
+import { Loader, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -172,7 +172,7 @@ export default function ReceiveOtp() {
             </Button>
 
             <p className="text-gray-500 text-center">
-              Don't have an account?{" "}
+              Dont have an account?{" "}
               <Link className="text-blue-600" href="/register">
                 {" "}
                 Create yours{" "}
