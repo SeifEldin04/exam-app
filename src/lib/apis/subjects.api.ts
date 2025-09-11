@@ -1,6 +1,8 @@
+"use client";
+
 export async function getSubjects(page = 1, limit = 6) {
   const response = await fetch(
-    `https://exam-app-opal.vercel.app/api/subjects?page=${page}&limit=${limit}`
+    `${process.env.NEXT_PUBLIC_API}/subjects?page=${page}&limit=${limit}`
   );
 
   const payload: ApiResponse<PaginatedResponse<{ subjects: Subject[] }>> =
