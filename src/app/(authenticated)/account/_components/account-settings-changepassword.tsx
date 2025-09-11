@@ -20,13 +20,13 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { changePasswordAction as changePasswordRequest } from "../_actions/changepassword-settings.action";
 import { toast } from "react-hot-toast";
 import { Check, Loader } from "lucide-react";
-import Error from "@/components/layout/exam/error-paragraph";
+import ErrorParagraph from "@/components/layout/exam/error-paragraph";
 import { useMutation } from "@tanstack/react-query";
 import { signOut } from "next-auth/react";
 
 export default function AccountSettingsChangepassword() {
   // Variables
-  const [error, setError] = useState<string | "">("");
+  const [error, setError] = useState<string>("");
 
   // Hooks
   const form = useForm<AccountSettingsChangepasswordValues>({
@@ -61,9 +61,7 @@ export default function AccountSettingsChangepassword() {
         </div>
       ));
 
-      signOut({
-        callbackUrl: "/login",
-      });
+      await signOut({ callbackUrl: "/login" });
     } else {
       setError(response.message || "An error occurred during password change");
     }
@@ -78,23 +76,16 @@ export default function AccountSettingsChangepassword() {
           name="oldPassword"
           render={({ field }) => (
             <FormItem className="my-2">
-              {/* Label */}
               <FormLabel className="text-left">Current Password</FormLabel>
-
-              {/* Field */}
-              <FormControl className="w-full">
+              <FormControl>
                 <PasswordInput
                   placeholder="********"
                   {...field}
-                  className={`
-                                        ${
-                                          form.formState.errors.oldPassword &&
-                                          "border-red-500"
-                                        }`}
+                  className={
+                    form.formState.errors.oldPassword ? "border-red-500" : ""
+                  }
                 />
               </FormControl>
-
-              {/* Feedback */}
               <FormMessage />
             </FormItem>
           )}
@@ -106,23 +97,16 @@ export default function AccountSettingsChangepassword() {
           name="password"
           render={({ field }) => (
             <FormItem className="my-2">
-              {/* Label */}
               <FormLabel className="text-left">New Password</FormLabel>
-
-              {/* Field */}
-              <FormControl className="w-full">
+              <FormControl>
                 <PasswordInput
                   placeholder="********"
                   {...field}
-                  className={`
-                                        ${
-                                          form.formState.errors.password &&
-                                          "border-red-500"
-                                        }`}
+                  className={
+                    form.formState.errors.password ? "border-red-500" : ""
+                  }
                 />
               </FormControl>
-
-              {/* Feedback */}
               <FormMessage />
             </FormItem>
           )}
@@ -134,30 +118,23 @@ export default function AccountSettingsChangepassword() {
           name="rePassword"
           render={({ field }) => (
             <FormItem className="my-2">
-              {/* Label */}
               <FormLabel className="text-left">Confirm New Password</FormLabel>
-
-              {/* Field */}
-              <FormControl className="w-full">
+              <FormControl>
                 <PasswordInput
                   placeholder="********"
                   {...field}
-                  className={`
-                                        ${
-                                          form.formState.errors.rePassword &&
-                                          "border-red-500"
-                                        }`}
+                  className={
+                    form.formState.errors.rePassword ? "border-red-500" : ""
+                  }
                 />
               </FormControl>
-
-              {/* Feedback */}
               <FormMessage />
             </FormItem>
           )}
         />
 
-        {/* error message */}
-        {error && <Error message={error} />}
+        {/* Error message */}
+        {error && <ErrorParagraph message={error} />}
 
         <Button type="submit" disabled={isPending} className="w-full mt-10">
           {isPending ? (

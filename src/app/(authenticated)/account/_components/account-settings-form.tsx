@@ -17,7 +17,6 @@ import {
   AccountSettingsProfileValues,
 } from "@/lib/schemas/account.schema";
 import { Button } from "@/components/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Dialog,
   DialogContent,
@@ -32,36 +31,27 @@ import deleteAccount, {
   profileSettingsAction as profileSettingsRequest,
 } from "../_actions/profile-settings.action";
 import toast from "react-hot-toast";
-import Error from "@/components/layout/exam/error-paragraph";
+import ErrorParagraph from "@/components/layout/exam/error-paragraph";
 import { signOut } from "next-auth/react";
 import { useMutation } from "@tanstack/react-query";
 import { AccountSettings } from "@/lib/types/account-settings";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function AccountSettingsForm({
   session,
 }: {
   session: AccountSettings;
 }) {
-  // Variables
-  const [error, setError] = useState<string | "">("");
+  const [error, setError] = useState<string>("");
 
-  // Phone Function to show number in input
-  const normalizePhoneInput = (phone: string) => {
-    if (phone.startsWith("0")) {
-      return "+20" + phone.slice(1);
-    }
-    return phone;
-  };
+  // عرض الهاتف في الحقل
+  const normalizePhoneInput = (phone: string) =>
+    phone.startsWith("0") ? "+20" + phone.slice(1) : phone;
 
-  // Phone function to normalize phone number to send to backend
-  const normalizePhone = (phone: string) => {
-    if (phone.startsWith("+20")) {
-      return phone.replace("+20", "0");
-    }
-    return phone;
-  };
+  // تجهيز الهاتف للإرسال للسيرفر
+  const normalizePhone = (phone: string) =>
+    phone.startsWith("+20") ? phone.replace("+20", "0") : phone;
 
-  //   Hooks
   const { mutateAsync: profileSettings, isPending } = useMutation({
     mutationFn: (values: AccountSettingsProfileValues) =>
       profileSettingsRequest(values),
@@ -78,15 +68,10 @@ export default function AccountSettingsForm({
     resolver: zodResolver(accountSettingsProfileSchema),
   });
 
-  // Submit handler
   const onSubmit: SubmitHandler<AccountSettingsProfileValues> = async (
     data
   ) => {
-    const payload = {
-      ...data,
-      phone: normalizePhone(data.phone),
-    };
-
+    const payload = { ...data, phone: normalizePhone(data.phone) };
     const response = await profileSettings(payload);
 
     if (response.success) {
@@ -94,14 +79,14 @@ export default function AccountSettingsForm({
         <div
           className={`${
             t.visible ? "animate-enter" : "animate-leave"
-          } bg-gray-800 text-white text-sm px-11 py-3 shadow-lg flex items-center justify-start gap-2`}
+          } bg-gray-800 text-white text-sm px-11 py-3 shadow-lg flex items-center gap-2`}
         >
           <Check className="w-5 h-5 text-green-400" />
           <span>{response.message}</span>
         </div>
       ));
     } else {
-      setError(response.message);
+      setError(response.message || "An error occurred while saving changes.");
     }
   };
 
@@ -113,18 +98,14 @@ export default function AccountSettingsForm({
         <div
           className={`${
             t.visible ? "animate-enter" : "animate-leave"
-          } bg-gray-800 text-white text-sm px-11 py-3 shadow-lg flex items-center justify-start gap-2`}
+          } bg-gray-800 text-white text-sm px-11 py-3 shadow-lg flex items-center gap-2`}
         >
           <Check className="w-5 h-5 text-green-400" />
           <span>Account deleted successfully</span>
         </div>
       ));
 
-      signOut({
-        callbackUrl: "/register",
-      });
-
-      // new URLSearchParams(location.search).delete('callbackUrl');
+      await signOut({ callbackUrl: "/register" });
     } else {
       setError(
         response.message || "An error occurred while deleting the account"
@@ -136,60 +117,46 @@ export default function AccountSettingsForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex w-full gap-5">
+          {/* First name */}
           <div className="w-1/2">
-            {/* Fisrt name */}
             <FormField
               control={form.control}
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  {/* Label */}
-                  <FormLabel> First name </FormLabel>
-
-                  {/* Field */}
+                  <FormLabel>First name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Seif Eldin"
                       {...field}
-                      className={`
-                                        ${
-                                          form.formState.errors.firstName &&
-                                          "border-red-500"
-                                        }`}
+                      className={
+                        form.formState.errors.firstName ? "border-red-500" : ""
+                      }
                     />
                   </FormControl>
-
-                  {/* Feedback */}
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
 
+          {/* Last name */}
           <div className="w-1/2">
-            {/* Last name */}
             <FormField
               control={form.control}
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  {/* Label */}
-                  <FormLabel> Last name </FormLabel>
-
-                  {/* Field */}
+                  <FormLabel>Last name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Khaled"
                       {...field}
-                      className={`
-                                        ${
-                                          form.formState.errors.lastName &&
-                                          "border-red-500"
-                                        }`}
+                      className={
+                        form.formState.errors.lastName ? "border-red-500" : ""
+                      }
                     />
                   </FormControl>
-
-                  {/* Feedback */}
                   <FormMessage />
                 </FormItem>
               )}
@@ -197,29 +164,22 @@ export default function AccountSettingsForm({
           </div>
         </div>
 
-        {/* User name */}
+        {/* Username */}
         <FormField
           control={form.control}
           name="username"
           render={({ field }) => (
             <FormItem className="pt-2">
-              {/* Label */}
-              <FormLabel> Username </FormLabel>
-
-              {/* Field */}
+              <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input
                   placeholder="user123"
                   {...field}
-                  className={`
-                                        ${
-                                          form.formState.errors.username &&
-                                          "border-red-500"
-                                        }`}
+                  className={
+                    form.formState.errors.username ? "border-red-500" : ""
+                  }
                 />
               </FormControl>
-
-              {/* Feedback */}
               <FormMessage />
             </FormItem>
           )}
@@ -231,23 +191,16 @@ export default function AccountSettingsForm({
           name="email"
           render={({ field }) => (
             <FormItem className="py-2">
-              {/* Label */}
-              <FormLabel> Email </FormLabel>
-
-              {/* Field */}
-              <FormControl className="mb-4">
+              <FormLabel>Email</FormLabel>
+              <FormControl>
                 <Input
                   placeholder="user@example.com"
                   {...field}
-                  className={`
-                                        ${
-                                          form.formState.errors.email &&
-                                          "border-red-500"
-                                        }`}
+                  className={
+                    form.formState.errors.email ? "border-red-500" : ""
+                  }
                 />
               </FormControl>
-
-              {/* Feedback */}
               <FormMessage />
             </FormItem>
           )}
@@ -259,35 +212,31 @@ export default function AccountSettingsForm({
           name="phone"
           render={({ field }) => (
             <FormItem className="my-2">
-              {/* Label */}
-              <FormLabel className="text-left">Phone</FormLabel>
-
-              {/* Field */}
-              <FormControl className="w-full">
+              <FormLabel>Phone</FormLabel>
+              <FormControl>
                 <PhoneInput
                   placeholder="Enter a phone number"
                   {...field}
-                  className={`
-                                        ${
-                                          form.formState.errors.phone &&
-                                          "border-red-500"
-                                        }`}
+                  className={
+                    form.formState.errors.phone ? "border-red-500" : ""
+                  }
                 />
               </FormControl>
-
-              {/* Feedback */}
               <FormMessage />
             </FormItem>
           )}
         />
 
-        {/* error message */}
-        {error && <Error message={error} />}
+        {/* Error message */}
+        {error && <ErrorParagraph message={error} />}
 
         <div className="flex gap-4">
           <Dialog>
-            <DialogTrigger className="w-full" asChild>
-              <Button className="w-full mt-10 bg-red-50 text-red-600 hover:bg-red-100">
+            <DialogTrigger asChild>
+              <Button
+                type="button"
+                className="w-full mt-10 bg-red-50 text-red-600 hover:bg-red-100"
+              >
                 Delete My Account
               </Button>
             </DialogTrigger>
@@ -304,7 +253,6 @@ export default function AccountSettingsForm({
                   <h1 className="text-red-600 font-medium text-lg text-center">
                     Are you sure you want to delete your account?
                   </h1>
-
                   <p className="text-gray-500 text-sm text-center mt-3">
                     This action is permanent and cannot be undone.
                   </p>
@@ -312,11 +260,14 @@ export default function AccountSettingsForm({
               </DialogHeader>
 
               <DialogFooter className="bg-gray-50 border-t border-gray-200 py-6 px-14">
-                <Button className="w-full bg-gray-200 text-black hover:bg-gray-300">
+                <Button
+                  type="button"
+                  className="w-full bg-gray-200 text-black hover:bg-gray-300"
+                >
                   Cancel
                 </Button>
-
                 <Button
+                  type="button"
                   className="w-full bg-red-600 hover:bg-red-700"
                   onClick={handleDeleteAccount}
                 >
