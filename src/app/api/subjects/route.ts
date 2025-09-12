@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          token: token.accesstoken as string,
+          token: `${token.accesstoken}`,
         },
       }
     );
