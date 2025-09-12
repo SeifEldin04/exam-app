@@ -1,9 +1,9 @@
-import { getToken } from "next-auth/jwt";
+import getToken from "@/lib/utils/get-token.server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const token = await getToken({ req });
+    const token = await getToken();
 
     if (!token || !token.accesstoken) {
       return NextResponse.json(
@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     const page = searchParams.get("page") || "1";
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/subjects?limit=${limit}&page=${page}`,
+      `${process.env.API}/subjects?limit=${limit}&page=${page}`,
       {
         method: "GET",
         headers: {
