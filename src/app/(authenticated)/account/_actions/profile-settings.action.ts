@@ -19,7 +19,7 @@ export async function profileSettingsAction(data: ProfileSettingsValues) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        token: `${token?.accesstoken}`,
+        token: token?.accesstoken as string,
       },
       body: JSON.stringify(data),
     });
