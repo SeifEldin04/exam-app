@@ -73,7 +73,7 @@ export async function GET(req: NextRequest) {
 
     // استدعاء الـ API الخارجي على السيرفر
     const response = await fetch(
-      `${process.env.API}/subjects?page=${page}&limit=${limit}`,
+      `${process.env.NEXT_PUBLIC_API}/subjects?page=${page}&limit=${limit}`,
       {
         headers: {
           "Content-Type": "application/json",
