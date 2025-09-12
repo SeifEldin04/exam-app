@@ -33,7 +33,7 @@ export default function FetchSubjects() {
   console.log("Environment Check:", {
     NEXT_PUBLIC_API: process.env.NEXT_PUBLIC_API,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    API: process.env.API,
+    API: process.env.NEXT_PUBLIC_DOMAIN,
   });
 
   // Auto load on scroll Effect

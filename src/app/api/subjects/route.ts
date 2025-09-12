@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     const page = searchParams.get("page") || "1";
 
     const response = await fetch(
-      `${process.env.API}/subjects?limit=${limit}&page=${page}`,
+      `${process.env.NEXT_PUBLIC_API}/subjects?limit=${limit}&page=${page}`,
       {
         method: "GET",
         headers: {
