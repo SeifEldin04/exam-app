@@ -16,19 +16,16 @@ export const authOptions: NextAuthOptions = {
       },
 
       authorize: async (credentials) => {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API}/auth/signin`,
-          {
-            method: "POST",
-            body: JSON.stringify({
-              email: credentials?.email,
-              password: credentials?.password,
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${process.env.API}/auth/signin`, {
+          method: "POST",
+          body: JSON.stringify({
+            email: credentials?.email,
+            password: credentials?.password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         const payload: ApiResponse<AuthResponse> = await response.json();
 
