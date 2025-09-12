@@ -6,10 +6,13 @@ import React, { useEffect, useRef } from "react";
 import { Loader2 } from "lucide-react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getSubjects } from "@/lib/apis/subjects.api";
+import getToken from "@/lib/utils/get-token.server";
 
-export default function FetchSubjects() {
+export default async function FetchSubjects() {
   const router = useRouter();
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+  const token = await getToken();
 
   const {
     data: payload,
@@ -34,6 +37,7 @@ export default function FetchSubjects() {
     NEXT_PUBLIC_API: process.env.NEXT_PUBLIC_API,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
+    TOKEN: token,
   });
 
   // Auto load on scroll Effect
