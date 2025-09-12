@@ -75,6 +75,8 @@ export default function AccountSettingsForm({
     const response = await profileSettings(payload);
 
     if (response.success) {
+      setError("");
+
       toast.custom((t) => (
         <div
           className={`${
