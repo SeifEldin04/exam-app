@@ -44,11 +44,11 @@ export default function AccountSettingsForm({
 }) {
   const [error, setError] = useState<string>("");
 
-  // عرض الهاتف في الحقل
+  // Normalize number to show in input to edit
   const normalizePhoneInput = (phone: string) =>
     phone.startsWith("0") ? "+20" + phone.slice(1) : phone;
 
-  // تجهيز الهاتف للإرسال للسيرفر
+  // Normalize number to send to backend
   const normalizePhone = (phone: string) =>
     phone.startsWith("+20") ? phone.replace("+20", "0") : phone;
 

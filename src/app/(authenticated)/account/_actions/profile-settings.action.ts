@@ -1,7 +1,6 @@
 "use server";
 
-import { getToken } from "next-auth/jwt";
-import { NextRequest } from "next/server";
+import getToken from "@/lib/utils/get-token.server";
 
 type ProfileSettingsValues = {
   firstName: string;
@@ -11,27 +10,31 @@ type ProfileSettingsValues = {
   phone: string;
 };
 
-export async function profileSettingsAction(
-  data: ProfileSettingsValues,
-  req: NextRequest
-) {
+export async function profileSettingsAction(data: ProfileSettingsValues) {
   try {
-    const token = await getToken({ req });
-    if (!token?.accesstoken) throw new Error("Unauthorized");
+    const token = await getToken();
+    console.log(token?.accesstoken);
 
     const response = await fetch(`${process.env.API}/auth/editProfile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        token: `${token.accesstoken}`,
+        token: `${token?.accesstoken}`,
       },
       body: JSON.stringify(data),
     });
 
     const result = await response.json();
 
+    if (!response.ok) {
+      return {
+        success: false,
+        message: result.message || "Something went wrong",
+      };
+    }
+
     return {
-      success: response.ok,
+      success: true,
       message: result.message,
       user: result.user,
     };
@@ -44,9 +47,9 @@ export async function profileSettingsAction(
   }
 }
 
-export default async function deleteAccount(req: NextRequest) {
+export default async function deleteAccount() {
   try {
-    const token = await getToken({ req });
+    const token = await getToken();
 
     const response = await fetch(`${process.env.API}/auth/deleteMe`, {
       method: "DELETE",
