@@ -80,105 +80,103 @@ export default function ReceiveOtp() {
   };
 
   return (
-    <div className="w-1/2">
-      <div className="my-60 mx-32">
-        {/* Form */}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            {/* prev */}
-            <div
-              className="border cursor-pointer border-gray-200 w-fit p-1"
+    <div className="flex flex-col w-full justify-center items-center my-80 px-20  mx-32">
+      {/* Form */}
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          {/* prev */}
+          <div
+            className="border cursor-pointer border-gray-200 w-fit p-1"
+            onClick={prevStep}
+          >
+            {" "}
+            <MoveLeft />{" "}
+          </div>
+
+          {/* header info */}
+          <h1 className="font-inter font-bold text-3xl mb-2 mt-14">
+            Verify OTP
+          </h1>
+          <p className="mb-10 text-gray-500">
+            Please enter the 6-digits code we have sent to: <br />
+            {email}{" "}
+            <span
               onClick={prevStep}
+              className="text-blue-600 underline cursor-pointer"
             >
               {" "}
-              <MoveLeft />{" "}
-            </div>
+              Edit{" "}
+            </span>
+          </p>
 
-            {/* header info */}
-            <h1 className="font-inter font-bold text-3xl mb-2 mt-14">
-              Verify OTP
-            </h1>
-            <p className="mb-10 text-gray-500">
-              Please enter the 6-digits code we have sent to: <br />
-              {email}{" "}
-              <span
-                onClick={prevStep}
-                className="text-blue-600 underline cursor-pointer"
-              >
-                {" "}
-                Edit{" "}
-              </span>
-            </p>
-
-            {/* OTP */}
-            <FormField
-              control={form.control}
-              name="resetCode"
-              render={({ field }) => (
-                <FormItem>
-                  {/* Field */}
-                  <FormControl>
-                    <InputOTP
-                      {...field}
-                      maxLength={6}
-                      pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-                    >
-                      <InputOTPGroup>
-                        <InputOTPSlot index={0} />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
-                      </InputOTPGroup>
-                    </InputOTP>
-                  </FormControl>
-
-                  {/* Feedback */}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Timer to resend OTP */}
-            <p className="font-medium text-sm text-gray-500 mt-9 text-center">
-              {timer > 0 ? (
-                <>
-                  You can request another code in:{" "}
-                  {String(timer).padStart(2, "0")}s
-                </>
-              ) : (
-                <>
-                  You can now request a new code{" "}
-                  <span
-                    className={`underline cursor-pointer ${
-                      isSending ? "text-gray-400" : "text-blue-600"
-                    }`}
-                    onClick={!isSending ? handleResend : undefined}
+          {/* OTP */}
+          <FormField
+            control={form.control}
+            name="resetCode"
+            render={({ field }) => (
+              <FormItem>
+                {/* Field */}
+                <FormControl>
+                  <InputOTP
+                    {...field}
+                    maxLength={6}
+                    pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
                   >
-                    {isSending ? "Sending..." : "Resend"}
-                  </span>
-                </>
-              )}
-            </p>
+                    <InputOTPGroup>
+                      <InputOTPSlot index={0} />
+                      <InputOTPSlot index={1} />
+                      <InputOTPSlot index={2} />
+                      <InputOTPSlot index={3} />
+                      <InputOTPSlot index={4} />
+                      <InputOTPSlot index={5} />
+                    </InputOTPGroup>
+                  </InputOTP>
+                </FormControl>
 
-            {/* error message */}
-            {error && <Error message={error} />}
+                {/* Feedback */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <Button className="w-full my-10" type="submit" disabled={isPending}>
-              {isPending ? <Loader className="animate-spin" /> : "Verify Code"}
-            </Button>
+          {/* Timer to resend OTP */}
+          <p className="font-medium text-sm text-gray-500 mt-9 text-center">
+            {timer > 0 ? (
+              <>
+                You can request another code in:{" "}
+                {String(timer).padStart(2, "0")}s
+              </>
+            ) : (
+              <>
+                You can now request a new code{" "}
+                <span
+                  className={`underline cursor-pointer ${
+                    isSending ? "text-gray-400" : "text-blue-600"
+                  }`}
+                  onClick={!isSending ? handleResend : undefined}
+                >
+                  {isSending ? "Sending..." : "Resend"}
+                </span>
+              </>
+            )}
+          </p>
 
-            <p className="text-gray-500 text-center">
-              Dont have an account?{" "}
-              <Link className="text-blue-600" href="/register">
-                {" "}
-                Create yours{" "}
-              </Link>
-            </p>
-          </form>
-        </Form>
-      </div>
+          {/* error message */}
+          {error && <Error message={error} />}
+
+          <Button className="w-full my-10" type="submit" disabled={isPending}>
+            {isPending ? <Loader className="animate-spin" /> : "Verify Code"}
+          </Button>
+
+          <p className="text-gray-500 text-center">
+            Dont have an account?{" "}
+            <Link className="text-blue-600" href="/register">
+              {" "}
+              Create yours{" "}
+            </Link>
+          </p>
+        </form>
+      </Form>
     </div>
   );
 }
