@@ -13,7 +13,6 @@ export async function changePasswordAction(
 ) {
   try {
     const token = await getToken();
-    console.log(token?.accesstoken);
 
     const response = await fetch(`${process.env.API}/auth/changePassword`, {
       method: "PATCH",

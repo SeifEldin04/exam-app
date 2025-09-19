@@ -28,7 +28,7 @@ import { useForgot } from "@/components/providers/components/forgot-provider";
 import { useRouter } from "next/navigation";
 
 export default function SetNewPassword() {
-  // Variables
+  // States
   const [error, setError] = useState<string | "">("");
 
   // Hooks
@@ -38,8 +38,10 @@ export default function SetNewPassword() {
 
   const { prevStep, email } = useForgot();
 
+  // Navigation
   const router = useRouter();
 
+  // form & Schema
   const form = useForm<SetNewPasswordValue>({
     defaultValues: {
       newPassword: "",
@@ -59,8 +61,6 @@ export default function SetNewPassword() {
 
     const response = await setNewPassword(payload);
 
-    console.log(response);
-
     if (response.message === "success") {
       router.push("/login");
     } else {
@@ -69,93 +69,91 @@ export default function SetNewPassword() {
   };
 
   return (
-    <div className="w-1/2">
-      <div className="my-60 mx-32">
-        {/* Form */}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            {/* prev */}
-            <div
-              className="border border-gray-200 w-fit p-1 cursor-pointer"
-              onClick={prevStep}
-            >
-              {" "}
-              <MoveLeft />{" "}
-            </div>
+    <div className="flex flex-col w-full justify-center items-center my-80 px-20my-60 mx-32">
+      {/* Form */}
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          {/* prev */}
+          <div
+            className="border border-gray-200 w-fit p-1 cursor-pointer"
+            onClick={prevStep}
+          >
+            {" "}
+            <MoveLeft />{" "}
+          </div>
 
-            {/* header info */}
-            <h1 className="font-inter font-bold text-3xl mb-2 mt-14">
-              Create a New Password
-            </h1>
-            <p className="mb-10 text-gray-500">
-              Create a new strong password for your account.
-            </p>
+          {/* header info */}
+          <h1 className="font-inter font-bold text-3xl mb-2 mt-14">
+            Create a New Password
+          </h1>
+          <p className="mb-10 text-gray-500">
+            Create a new strong password for your account.
+          </p>
 
-            {/* New password */}
-            <FormField
-              control={form.control}
-              name="newPassword"
-              render={({ field }) => (
-                <FormItem>
-                  {/* Label */}
-                  <FormLabel> New Password </FormLabel>
+          {/* New password */}
+          <FormField
+            control={form.control}
+            name="newPassword"
+            render={({ field }) => (
+              <FormItem>
+                {/* Label */}
+                <FormLabel> New Password </FormLabel>
 
-                  {/* Field */}
-                  <FormControl>
-                    <PasswordInput
-                      {...field}
-                      className={`mb-4 ${
-                        form.formState.errors.newPassword && "border-red-500"
-                      }`}
-                      placeholder="********"
-                    />
-                  </FormControl>
+                {/* Field */}
+                <FormControl>
+                  <PasswordInput
+                    {...field}
+                    className={`mb-4 ${
+                      form.formState.errors.newPassword && "border-red-500"
+                    }`}
+                    placeholder="********"
+                  />
+                </FormControl>
 
-                  {/* Feedback */}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                {/* Feedback */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            {/* Re password */}
-            <FormField
-              control={form.control}
-              name="rePassword"
-              render={({ field }) => (
-                <FormItem>
-                  {/* Label */}
-                  <FormLabel> Confirm New Password </FormLabel>
+          {/* Re password */}
+          <FormField
+            control={form.control}
+            name="rePassword"
+            render={({ field }) => (
+              <FormItem>
+                {/* Label */}
+                <FormLabel> Confirm New Password </FormLabel>
 
-                  {/* Field */}
-                  <FormControl>
-                    <PasswordInput
-                      {...field}
-                      className={`mb-4 ${
-                        form.formState.errors.rePassword && "border-red-500"
-                      }`}
-                      placeholder="********"
-                    />
-                  </FormControl>
+                {/* Field */}
+                <FormControl>
+                  <PasswordInput
+                    {...field}
+                    className={`mb-4 ${
+                      form.formState.errors.rePassword && "border-red-500"
+                    }`}
+                    placeholder="********"
+                  />
+                </FormControl>
 
-                  {/* Feedback */}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                {/* Feedback */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            {/* error message */}
-            {error && <Error message={error} />}
+          {/* error message */}
+          {error && <Error message={error} />}
 
-            <Button className="w-full my-10" type="submit" disabled={isPending}>
-              {isPending ? (
-                <Loader className="animate-spin" />
-              ) : (
-                "Update Password"
-              )}
-            </Button>
-          </form>
-        </Form>
-      </div>
+          <Button className="w-full my-10" type="submit" disabled={isPending}>
+            {isPending ? (
+              <Loader className="animate-spin" />
+            ) : (
+              "Update Password"
+            )}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 }

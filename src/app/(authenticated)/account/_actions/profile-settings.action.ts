@@ -13,7 +13,6 @@ type ProfileSettingsValues = {
 export async function profileSettingsAction(data: ProfileSettingsValues) {
   try {
     const token = await getToken();
-    console.log(token?.accesstoken);
 
     const response = await fetch(`${process.env.API}/auth/editProfile`, {
       method: "PUT",
