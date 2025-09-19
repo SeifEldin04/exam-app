@@ -61,8 +61,6 @@ export default function RegisterForm() {
 
     const response = await register(payload);
 
-    console.log(error);
-
     if (response.success) {
       window.location.href = "/login";
     } else {
@@ -71,7 +69,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="my-36 mx-32">
+    <div className="flex flex-col w-1/2 justify-center items-center my-40 px-20">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {/* header info */}

@@ -11,12 +11,6 @@ export default function useCheckQuestions() {
 
       return payload;
     },
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(error.message);
-    },
   });
 
   return { isPending, error, checkQuestions: mutate };

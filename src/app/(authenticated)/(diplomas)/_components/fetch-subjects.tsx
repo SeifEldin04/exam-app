@@ -30,12 +30,6 @@ export default function FetchSubjects() {
     },
   });
 
-  console.log("Environment Check:", {
-    NEXT_PUBLIC_API: process.env.NEXT_PUBLIC_API,
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
-  });
-
   // Auto load on scroll Effect
   useEffect(() => {
     if (!hasNextPage || isFetchingNextPage) return;

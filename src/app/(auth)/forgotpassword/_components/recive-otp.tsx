@@ -72,8 +72,6 @@ export default function ReceiveOtp() {
 
     const response = await otpForgot(values);
 
-    console.log(response);
-
     if (response.status) {
       nextStep();
     } else {
@@ -102,7 +100,7 @@ export default function ReceiveOtp() {
             </h1>
             <p className="mb-10 text-gray-500">
               Please enter the 6-digits code we have sent to: <br />
-              user@example.com{" "}
+              {email}{" "}
               <span
                 onClick={prevStep}
                 className="text-blue-600 underline cursor-pointer"

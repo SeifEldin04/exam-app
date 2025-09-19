@@ -58,68 +58,66 @@ export default function ForgotPasswordEmail() {
   };
 
   return (
-    <div className="w-1/2">
-      <div className="my-80 mx-32">
-        {/* Form */}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <h1 className="font-inter font-bold text-3xl mb-2">
-              Forgot Password
-            </h1>
-            <p className="mb-10 text-gray-500">
-              Dont worry, we will help you recover your account.
-            </p>
+    <div className="flex flex-col w-full justify-center items-center my-80 px-20">
+      {/* Form */}
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <h1 className="font-inter font-bold text-3xl mb-2">
+            Forgot Password
+          </h1>
+          <p className="mb-10 text-gray-500">
+            Dont worry, we will help you recover your account.
+          </p>
 
-            {/* Email */}
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  {/* Label */}
-                  <FormLabel> Email </FormLabel>
+          {/* Email */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                {/* Label */}
+                <FormLabel> Email </FormLabel>
 
-                  {/* Field */}
-                  <FormControl>
-                    <Input
-                      type="email"
-                      {...field}
-                      className={`mb-4 ${
-                        form.formState.errors.email && "border-red-500"
-                      }`}
-                      placeholder="user@example.com"
-                    />
-                  </FormControl>
+                {/* Field */}
+                <FormControl>
+                  <Input
+                    type="email"
+                    {...field}
+                    className={`mb-4 ${
+                      form.formState.errors.email && "border-red-500"
+                    }`}
+                    placeholder="user@example.com"
+                  />
+                </FormControl>
 
-                  {/* Feedback */}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                {/* Feedback */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            {/* error message */}
-            {error && <Error message={error} />}
+          {/* error message */}
+          {error && <Error message={error} />}
 
-            <Button className="w-full my-10" type="submit" disabled={isPending}>
-              {isPending ? (
-                <Loader className="animate-spin" />
-              ) : (
-                <>
-                  Continue <MoveRight />
-                </>
-              )}
-            </Button>
+          <Button className="w-full my-10" type="submit" disabled={isPending}>
+            {isPending ? (
+              <Loader className="animate-spin" />
+            ) : (
+              <>
+                Continue <MoveRight />
+              </>
+            )}
+          </Button>
 
-            <p className="text-gray-500 text-center">
-              Dont have an account?{" "}
-              <Link className="text-blue-600" href="/register">
-                {" "}
-                Create yours{" "}
-              </Link>
-            </p>
-          </form>
-        </Form>
-      </div>
+          <p className="text-gray-500 text-center">
+            Dont have an account?{" "}
+            <Link className="text-blue-600" href="/register">
+              {" "}
+              Create yours{" "}
+            </Link>
+          </p>
+        </form>
+      </Form>
     </div>
   );
 }

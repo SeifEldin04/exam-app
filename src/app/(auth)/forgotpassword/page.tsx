@@ -1,15 +1,13 @@
 import React from "react";
-import AuthSideInfo from "../../../components/layout/auth/auth-side-info";
 import Forgot from "./_components";
+import { ForgotProvider } from "@/components/providers/components/forgot-provider";
 
 export default function Page() {
   return (
-    <main className="flex h-screen">
-      {/* left side (info) */}
-      <AuthSideInfo />
-
-      {/* right side (forgot password) */}
-      <Forgot />
-    </main>
+    <ForgotProvider>
+      <div className="w-1/2 flex flex-col justify-center items-center ">
+        <Forgot />
+      </div>
+    </ForgotProvider>
   );
 }

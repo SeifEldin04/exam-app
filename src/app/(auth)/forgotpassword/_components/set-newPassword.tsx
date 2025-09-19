@@ -28,7 +28,7 @@ import { useForgot } from "@/components/providers/components/forgot-provider";
 import { useRouter } from "next/navigation";
 
 export default function SetNewPassword() {
-  // Variables
+  // States
   const [error, setError] = useState<string | "">("");
 
   // Hooks
@@ -38,8 +38,10 @@ export default function SetNewPassword() {
 
   const { prevStep, email } = useForgot();
 
+  // Navigation
   const router = useRouter();
 
+  // form & Schema
   const form = useForm<SetNewPasswordValue>({
     defaultValues: {
       newPassword: "",
@@ -58,8 +60,6 @@ export default function SetNewPassword() {
     };
 
     const response = await setNewPassword(payload);
-
-    console.log(response);
 
     if (response.message === "success") {
       router.push("/login");

@@ -110,9 +110,6 @@ export function ResultChart({
 
   return (
     <Card className="w-fit">
-      {/* <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-semibold text-center">Quiz Results</CardTitle>
-            </CardHeader> */}
       <CardContent className="px-4 py-28">
         <div style={{ width: config.width, height: config.height }}>
           <ResponsiveContainer width="100%" height="100%">

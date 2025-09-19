@@ -43,8 +43,6 @@ export async function GET(req: NextRequest) {
     const payload: ApiResponse<{ questions: Question[] }> =
       await response.json();
 
-    console.log("Questions API response:", payload);
-
     return NextResponse.json(payload, { status: 200 });
   } catch (error) {
     console.error("Questions API Route Error:", error);

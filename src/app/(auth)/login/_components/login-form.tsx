@@ -57,7 +57,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="my-80 mx-32">
+    <div className="flex flex-col w-1/2 justify-center items-center px-20">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <h1 className="font-inter font-bold text-3xl mb-10">Login</h1>
@@ -120,7 +120,7 @@ export default function LoginForm() {
 
           <Link
             className="flex justify-end mt-2 text-blue-600 mb-10"
-            href="/forgot-password"
+            href="/forgotpassword"
           >
             Forgot your password?
           </Link>
