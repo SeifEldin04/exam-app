@@ -60,6 +60,9 @@ export const ReceiveOtpSchema = z.object({
 // Step (3)
 export const SetNewPasswordSchema = z
   .object({
+    email: z
+      .email("Please enter a valid email")
+      .nonempty("Your email is required"),
     newPassword: z
       .string()
       .min(6, "Password must be at least 6 characters")

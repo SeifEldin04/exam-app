@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import notFound from "../../puplic/assets/404.jpg";
+import notFound from "../../public/assets/404.jpg";
 
 export default function NotFound() {
   return (

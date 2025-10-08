@@ -1,6 +1,4 @@
 import React from "react";
-import elevateLogo from "../../../../../puplic/assets/elevate 2.png";
-import userProfile from "../../../../../puplic/assets/user profile.jpg";
 import Image from "next/image";
 import { FolderCode } from "lucide-react";
 import { getServerSession, Session } from "next-auth";
@@ -16,7 +14,7 @@ export default async function Sidebar() {
       {/* elevate logo */}
       <div className="logo w-48">
         <Image
-          src={elevateLogo}
+          src="/assets/elevate.png"
           className="w-full mt-0"
           alt="elevate exams logo"
         />
@@ -35,7 +33,7 @@ export default async function Sidebar() {
         {/* user information */}
         <div className="flex gap-3">
           <div className="w-14 h-14 border overflow-hidden border-blue-600">
-            <Image src={userProfile} className="w-full" alt="" />
+            <Image src="/assets/userProfile.jpg" className="w-full" alt="" />
           </div>
 
           <div className="flex items-center justify-between w-full">

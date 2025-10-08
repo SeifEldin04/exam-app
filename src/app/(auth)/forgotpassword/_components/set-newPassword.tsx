@@ -19,10 +19,7 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Error from "@/components/layout/submission-feedback";
 import { useMutation } from "@tanstack/react-query";
-import {
-  ResetPasswordField,
-  SetNewPasswordAction,
-} from "../_actions/set-newPassword.action";
+import { SetNewPasswordAction } from "../_actions/set-newPassword.action";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useForgot } from "@/components/providers/components/forgot-provider";
 import { useRouter } from "next/navigation";
@@ -33,7 +30,7 @@ export default function SetNewPassword() {
 
   // Hooks
   const { isPending, mutateAsync: setNewPassword } = useMutation({
-    mutationFn: (values: ResetPasswordField) => SetNewPasswordAction(values),
+    mutationFn: (values: SetNewPasswordValue) => SetNewPasswordAction(values),
   });
 
   const { prevStep, email } = useForgot();
@@ -55,6 +52,7 @@ export default function SetNewPassword() {
     const payload = {
       email,
       newPassword: values.newPassword,
+      rePassword: values.rePassword,
     };
 
     const response = await setNewPassword(payload);
