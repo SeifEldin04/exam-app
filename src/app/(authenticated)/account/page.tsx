@@ -1,5 +1,5 @@
 import React from "react";
-import Title from "../../../components/layout/exam/title";
+import Title from "../../../components/layout/title";
 import { UserRound } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";

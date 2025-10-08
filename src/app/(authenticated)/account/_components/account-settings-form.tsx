@@ -31,7 +31,7 @@ import deleteAccount, {
   profileSettingsAction as profileSettingsRequest,
 } from "../_actions/profile-settings.action";
 import toast from "react-hot-toast";
-import ErrorParagraph from "@/components/layout/exam/error-paragraph";
+import ErrorParagraph from "@/components/layout/submission-feedback";
 import { signOut } from "next-auth/react";
 import { useMutation } from "@tanstack/react-query";
 import { AccountSettings } from "@/lib/types/account-settings";

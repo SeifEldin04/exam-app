@@ -1,18 +1,9 @@
 "use server";
 
+import { RegisterValues } from "@/lib/schemas/auth.schema";
 import { AuthResponse } from "@/lib/types/auth";
 
-type RegisterFields = {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  phone: string;
-  password: string;
-  rePassword: string;
-};
-
-export async function RegisterAction(data: RegisterFields) {
+export async function registerAction(data: RegisterValues) {
   try {
     const response = await fetch(`${process.env.API}/auth/signup`, {
       method: "POST",
@@ -26,11 +17,7 @@ export async function RegisterAction(data: RegisterFields) {
       throw new Error(payload.message);
     }
 
-    return {
-      id: payload.user._id,
-      accesstoken: payload.token,
-      ...payload.user,
-    };
+    return payload;
   } catch (error) {
     console.error("Registration error:", error);
     return {

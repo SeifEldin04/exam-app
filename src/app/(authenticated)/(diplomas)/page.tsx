@@ -1,5 +1,5 @@
 import React from "react";
-import Title from "../../../components/layout/exam/title";
+import Title from "../../../components/layout/title";
 import { GraduationCap } from "lucide-react";
 import FetchSubjects from "./_components/fetch-subjects";
 

@@ -20,7 +20,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { changePasswordAction as changePasswordRequest } from "../_actions/changepassword-settings.action";
 import { toast } from "react-hot-toast";
 import { Check, Loader } from "lucide-react";
-import ErrorParagraph from "@/components/layout/exam/error-paragraph";
+import ErrorParagraph from "@/components/layout/submission-feedback";
 import { useMutation } from "@tanstack/react-query";
 import { signOut } from "next-auth/react";
 

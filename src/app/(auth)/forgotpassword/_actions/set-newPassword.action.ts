@@ -1,11 +1,8 @@
 "use server";
 
-export type ResetPasswordField = {
-  email: string;
-  newPassword: string;
-};
+import { SetNewPasswordValue } from "@/lib/schemas/auth.schema";
 
-export async function SetNewPasswordAction(data: ResetPasswordField) {
+export async function SetNewPasswordAction(data: SetNewPasswordValue) {
   try {
     const response = await fetch(`${process.env.API}/auth/resetPassword`, {
       method: "PUT",

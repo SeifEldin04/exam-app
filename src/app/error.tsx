@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import ErrorUI from "@/components/layout/exam/error-paragraph";
+import ErrorUI from "@/components/layout/submission-feedback";
 import { Button } from "@/components/ui/button";
 
 export default function Error({

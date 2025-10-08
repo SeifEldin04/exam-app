@@ -1,6 +1,6 @@
 import React from "react";
 import FetchQuestions from "./_components/fetch-questions";
-import Title from "@/components/layout/exam/title";
+import Title from "@/components/layout/title";
 import { CircleQuestionMark } from "lucide-react";
 
 type PageProps = {

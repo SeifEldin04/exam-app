@@ -1,10 +1,10 @@
 "use server";
 
-type EmailField = {
-  email: string;
-};
+import { ForgotPasswordEmailValue } from "@/lib/schemas/auth.schema";
 
-export async function ForgotPasswordEmailAction(data: EmailField) {
+export async function ForgotPasswordEmailAction(
+  data: ForgotPasswordEmailValue
+) {
   try {
     const response = await fetch(`${process.env.API}/auth/forgotPassword`, {
       method: "POST",

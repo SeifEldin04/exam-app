@@ -1,10 +1,8 @@
 "use server";
 
-type OtpField = {
-  resetCode: string;
-};
+import { ReceiveOtpValue } from "@/lib/schemas/auth.schema";
 
-export async function ReceiveOtpAction(data: OtpField) {
+export async function ReceiveOtpAction(data: ReceiveOtpValue) {
   try {
     const response = await fetch(`${process.env.API}/auth/verifyResetCode`, {
       method: "POST",

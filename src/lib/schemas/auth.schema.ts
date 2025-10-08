@@ -1,14 +1,5 @@
 import { z } from "zod";
 
-// Login
-export const loginSchema = z.object({
-  email: z
-    .string()
-    .email("Invalid email address")
-    .nonempty("Your email is required"),
-  password: z.string().nonempty("Your password is required"),
-});
-
 // Register
 export const registerSchema = z
   .object({
@@ -26,11 +17,16 @@ export const registerSchema = z
       .min(10, "Phone must be at least 10 digits")
       .nonempty("Your phone number is required"),
 
-    email: z.string().nonempty("Your email is required"),
+    email: z
+      .email("Please enter a valid email")
+      .nonempty("Your email is required"),
 
     password: z
       .string()
-      .min(6, "Password must be at least 6 characters")
+      .min(
+        6,
+        "Password must be at least 8 characters , at least one special character , one uppercase and lowercase letter"
+      )
       .nonempty("Your password is required"),
 
     rePassword: z.string().nonempty("Please confirm your password"),
@@ -40,10 +36,20 @@ export const registerSchema = z
     path: ["rePassword"],
   });
 
+// Login
+export const loginSchema = z.object({
+  email: z
+    .email("Please enter a valid email")
+    .nonempty("Your email is required"),
+  password: z.string().nonempty("Your password is required"),
+});
+
 // Forgot password
 // step (1)
 export const ForgotPasswordEmailSchema = z.object({
-  email: z.string().nonempty("Your email is required"),
+  email: z
+    .email("Please enter a valid email")
+    .nonempty("Your email is required"),
 });
 
 // Step (2)
