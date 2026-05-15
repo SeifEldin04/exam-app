@@ -57,7 +57,7 @@ export default function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-[28.5rem]">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="">
         <div className="flex w-full gap-5">
           <div className="w-1/2">
             {/* Fisrt name */}

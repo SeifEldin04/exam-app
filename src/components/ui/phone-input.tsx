@@ -100,7 +100,7 @@ const CountrySelect = ({
         <Button
           type="button"
           variant="outline"
-          className="flex gap-1 rounded-e-none border-r-0 px-3 focus:z-10"
+          className="focus:z-10 flex gap-1 px-3 border-r-0 rounded-e-none"
           disabled={disabled}
         >
           <FlagComponent
@@ -112,7 +112,7 @@ const CountrySelect = ({
           />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[300px] p-0">
+      <PopoverContent className="p-0 w-[300px]">
         <Command>
           <CommandInput
             value={searchValue}
@@ -178,7 +178,7 @@ const CountrySelectOption = ({
     <CommandItem className="gap-2" onSelect={handleSelect}>
       <FlagComponent country={country} countryName={countryName} />
       <span className="flex-1 text-sm">{countryName}</span>
-      <span className="text-sm text-foreground/50">{`+${RPNInput.getCountryCallingCode(
+      <span className="text-foreground/50 text-sm">{`+${RPNInput.getCountryCallingCode(
         country
       )}`}</span>
       <CheckIcon

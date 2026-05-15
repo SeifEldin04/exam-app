@@ -81,7 +81,7 @@ export default function ReceiveOtp() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-[28.5rem]">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="">
         {/* prev */}
         <div
           className="border cursor-pointer border-gray-200 w-fit p-1"

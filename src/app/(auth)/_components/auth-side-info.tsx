@@ -30,7 +30,7 @@ export default function AuthSideInfo() {
   ];
 
   return (
-    <aside className="py-20 px-32 flex flex-col items-center justify-center relative bg-gradient-to-br from-white to-blue-50 overflow-hidden min-h-screen">
+    <aside className="hidden py-20 px-32 lg:flex flex-col items-center justify-center relative bg-gradient-to-br from-white to-blue-50 overflow-hidden min-h-screen">
       {/*  right circle */}
       <div className="absolute -top-10 -right-10 w-96 h-96 bg-blue-400 rounded-full blur-[140px] opacity-70"></div>
 

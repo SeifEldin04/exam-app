@@ -12,7 +12,6 @@ import {
   RotateCcw,
 } from "lucide-react";
 import React, { useRef, useState } from "react";
-import useQuestions from "../../../../../../hooks/questions/use-questions";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AnswerFields, ExamSchema } from "@/lib/schemas/exam.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,6 +27,7 @@ import ExamDuration from "./exam-duration";
 import useCheckQuestions from "@/hooks/questions/use-check-questions";
 import { useRouter } from "next/navigation";
 import { ResultChart } from "./result-chart";
+import useQuestions from "@/hooks/questions/use-questions";
 
 // props type
 interface FetchQuestionProps {
@@ -112,7 +112,7 @@ export default function FetchQuestions({ examId }: FetchQuestionProps) {
         {/* Header */}
 
         {/* Question Number */}
-        <div className="flex justify-between items-center mb-2">
+        <div className="flex md:flex-row flex-col justify-between md:items-center gap-1 mb-2">
           <p className="text-gray-500 text-sm">
             {" "}
             Frontend Development - {questions[0]?.exam.title}{" "}
@@ -214,7 +214,7 @@ export default function FetchQuestions({ examId }: FetchQuestionProps) {
                 render={({ field }) => (
                   <FormItem>
                     {/* Label || Question */}
-                    <FormLabel className="text-2xl font-semibold text-blue-600 mb-4">
+                    <FormLabel className="md:text-2xl text-lg font-semibold text-blue-600 mb-4">
                       {currentQuestion?.question}
                     </FormLabel>
 
@@ -288,7 +288,7 @@ export default function FetchQuestions({ examId }: FetchQuestionProps) {
                     if (isPending) return true;
 
                     const currentAnswer = form.getValues(
-                      `answers.${currentIndex}`
+                      `answers.${currentIndex}`,
                     );
 
                     if (currentAnswer?.correct) return false;

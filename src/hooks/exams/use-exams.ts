@@ -1,12 +1,12 @@
 "use client";
 
-import { getExamsBySubject } from "@/lib/apis/exams.api";
+import { getExams } from "@/lib/apis/exams.api";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useExams(subjectId: string) {
+export default function useExams() {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["exams", subjectId],
-    queryFn: () => getExamsBySubject(subjectId),
+    queryKey: ["exams"],
+    queryFn: () => getExams(),
   });
 
   return { isLoading, error, exams: data?.exams || [] };

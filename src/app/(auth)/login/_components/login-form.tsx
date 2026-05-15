@@ -42,7 +42,7 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-[28rem]">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="">
         {/* Email */}
         <FormField
           control={form.control}

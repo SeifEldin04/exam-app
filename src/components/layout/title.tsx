@@ -32,7 +32,9 @@ export default function Title({ title, icon }: TitleProps) {
         <div className="flex gap-5 items-center">
           {icon}
 
-          <h1 className="font-inter text-3xl font-semibold">{title}</h1>
+          <h1 className="font-inter text-xl lg:text-3xl font-semibold">
+            {title}
+          </h1>
         </div>
       </div>
     </div>

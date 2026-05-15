@@ -1,4 +1,4 @@
-import { CheckQuestionAction } from "@/app/(authenticated)/(diplomas)/[subject]/[exam]/_actions/question.action";
+import { CheckQuestionAction } from "@/app/(authenticated)/(subjects)/[exam]/_actions/question.action";
 import { AnswerFields } from "@/lib/schemas/exam.schema";
 import { useMutation } from "@tanstack/react-query";
 
