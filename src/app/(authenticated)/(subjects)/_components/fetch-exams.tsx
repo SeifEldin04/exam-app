@@ -5,18 +5,14 @@ import { Loader2, Timer } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-type FetchExamsProps = {
-  subjectId?: string;
-};
-
-export default function FetchExams({ subjectId }: FetchExamsProps) {
+export default function FetchExams() {
   // Hooks
-  const { isLoading, error, exams } = useExams(subjectId || "");
+  const { isLoading, error, exams } = useExams();
   const router = useRouter();
 
   //   Navigation to questions
-  function questionsNavigate(examSubject: string, examId: string) {
-    router.push(`/${examSubject}/${examId}`);
+  function questionsNavigate(examId: string) {
+    router.push(`/${examId}`);
   }
 
   // Remove timer from localstorage Effect
@@ -41,18 +37,18 @@ export default function FetchExams({ subjectId }: FetchExamsProps) {
     );
 
   return exams.length > 0 ? (
-    // page (2) [ Exams ]
+    // page (1) [ Exams ]
 
     // Exam List
     <div className="bg-white m-6 p-6">
       {exams.map((exam) => (
         <div
           key={exam._id}
-          className="p-4 border-b flex justify-between bg-blue-50 hover:bg-blue-100 duration-100 cursor-pointer"
-          onClick={() => questionsNavigate(exam.subject, exam._id)}
+          className="p-4 border-b flex flex-col md:flex-row md:justify-between bg-blue-50 hover:bg-blue-100 duration-100 cursor-pointer"
+          onClick={() => questionsNavigate(exam._id)}
         >
           <div>
-            <h2 className="text-xl font-semibold mb-1 text-blue-600">
+            <h2 className="lg:text-xl font-semibold my-1 text-blue-600">
               {exam.title}
             </h2>
             <p className="text-gray-500 text-sm">
@@ -60,9 +56,9 @@ export default function FetchExams({ subjectId }: FetchExamsProps) {
             </p>
           </div>
 
-          <p className="text-gray-500 text-sm flex items-center">
+          <p className="text-gray-500 text-sm my-1 flex items-center">
             {" "}
-            <Timer /> Duration: {exam.duration} minutes
+            <Timer className="me-1" /> Duration: {exam.duration} minutes
           </p>
         </div>
       ))}

@@ -59,7 +59,7 @@ export default function ForgotPasswordEmail() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-[28.5rem]">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="">
         <h1 className="font-inter font-bold text-3xl mb-2">Forgot Password</h1>
         <p className="mb-10 text-gray-500">
           Dont worry, we will help you recover your account.

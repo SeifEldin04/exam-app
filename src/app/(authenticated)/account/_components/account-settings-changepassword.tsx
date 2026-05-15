@@ -136,9 +136,9 @@ export default function AccountSettingsChangepassword() {
         {/* Error message */}
         {error && <ErrorParagraph message={error} />}
 
-        <Button type="submit" disabled={isPending} className="w-full mt-10">
+        <Button type="submit" disabled={isPending} className="mt-10 w-full">
           {isPending ? (
-            <Loader className="animate-spin mr-2" />
+            <Loader className="mr-2 animate-spin" />
           ) : (
             "Update Password"
           )}

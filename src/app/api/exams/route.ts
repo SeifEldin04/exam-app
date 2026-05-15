@@ -8,23 +8,23 @@ export async function GET(req: NextRequest) {
     if (!token || !token.accesstoken) {
       return NextResponse.json(
         { code: 401, message: "Unauthorized - No valid token" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     // Get the subject parameter from the URL
-    const { searchParams } = new URL(req.url);
-    const subject = searchParams.get("subject");
+    // const { searchParams } = new URL(req.url);
+    // const subject = searchParams.get("subject");
 
-    if (!subject) {
-      return NextResponse.json(
-        { code: 400, message: "Subject parameter is required" },
-        { status: 400 }
-      );
-    }
+    // if (!subject) {
+    //   return NextResponse.json(
+    //     { code: 400, message: "Subject parameter is required" },
+    //     { status: 400 },
+    //   );
+    // }
 
     // Construct the URL with the subject parameter
-    const apiUrl = `${process.env.API}/exams?subject=${subject}`;
+    const apiUrl = `${process.env.API}/exams`;
 
     const response = await fetch(apiUrl, {
       method: "GET",
@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
           code: response.status,
           message: `API request failed with status ${response.status}`,
         },
-        { status: response.status }
+        { status: response.status },
       );
     }
 
@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
     console.error("API Route Error:", error);
     return NextResponse.json(
       { code: 500, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

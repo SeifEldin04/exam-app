@@ -14,7 +14,7 @@ export default function AccountSettingsClient({
   session: AccountSettings | null;
 }) {
   const [activeTab, setActiveTab] = useState<"profile" | "changePassword">(
-    "profile"
+    "profile",
   );
 
   if (!session) {
@@ -28,7 +28,7 @@ export default function AccountSettingsClient({
   return (
     <>
       {/* Sidebar */}
-      <div className="bg-white w-96 p-6 flex flex-col h-full justify-between">
+      <div className="hidden bg-white w-96 p-6 md:flex flex-col h-full justify-between">
         <div>
           <ul>
             <li
@@ -71,6 +71,31 @@ export default function AccountSettingsClient({
 
       {/* Content */}
       <div className="flex flex-col w-full">
+        {/* Sidebar in mobile */}
+        <ul className="md:hidden mb-4">
+          <li
+            onClick={() => setActiveTab("profile")}
+            className={`px-5 py-3 flex items-center gap-3 cursor-pointer ${
+              activeTab === "profile"
+                ? "bg-blue-50 text-blue-600"
+                : "text-gray-500 hover:text-blue-600"
+            }`}
+          >
+            <CircleUserRound /> Profile
+          </li>
+
+          <li
+            onClick={() => setActiveTab("changePassword")}
+            className={`px-5 py-3 flex items-center gap-3 cursor-pointer ${
+              activeTab === "changePassword"
+                ? "bg-blue-50 text-blue-600"
+                : "text-gray-500 hover:text-blue-600"
+            }`}
+          >
+            <Lock /> Change Password
+          </li>
+        </ul>
+
         {activeTab === "profile" && (
           <div className="bg-white p-6 w-full">
             <AccountSettingsForm session={session} />

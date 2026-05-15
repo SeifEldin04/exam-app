@@ -1,5 +1,5 @@
-export async function getExamsBySubject(subjectId: string) {
-  const response = await fetch(`/api/exams?subject=${subjectId}`);
+export async function getExams() {
+  const response = await fetch(`/api/exams`);
 
   const payload: ApiResponse<{ exams: Exam[] }> = await response.json();
 

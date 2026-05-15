@@ -68,7 +68,7 @@ export default function SetNewPassword() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-[28.5rem]">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="">
         {/* prev */}
         <div
           className="border border-gray-200 w-fit p-1 cursor-pointer"
